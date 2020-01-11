@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #app{
+            background: #ccc;
+        }
+        .header-all{
+            height: 50px;
+            background: #333;
+        }
+        .header{
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            width: 600px;
+            margin: 0 auto;;
+        }
+        .header h1{
+            font-size: 24px;
+            color: #ccc;
+            align-self: center;
+        }
+        .header input{
+            padding: 6px;
+            border-radius: 6px;
+            font-size: 14px;
+            height: 26px;
+            align-self: center;
+            width: 360px;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+        }
+        .content{
+            width: 600px;
+            margin: 20px auto;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .todoheader{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .todoheader span{
+            background: #eee;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 50%;
+            color: #333;
+            font-weight: 700;
+        }
+        .doneheader{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .doneheader span{
+            background: #eee;
+            padding: 4px 8px;
+            border-radius: 50%;
+            font-size: 12px;
+            color: #333;
+            font-weight: 700;
+        }
+        .todolist{
+            background: white;
+            display: flex;
+            padding: 6px 8px 6px 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .todolist input{
+            width: 500px;
+            padding: 6px;
+            border:none;
+            border-radius: 3px;
+        }
+        .todolist span{
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+        }
+        .todolist span:nth-child(1){
+            background-color: #ccc;
+        }
+        .donelist{
+            background: white;
+            display: flex;
+            padding: 6px 8px 6px 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .donelist input{
+            width: 500px;
+            padding: 6px;
+            border: none;
+            border-radius: 3px;
+        }
+        .donelist span{
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+        }
+        .del{
+            background: url('./del.jpg') no-repeat 0 0;
+            background-size: 20px 20px;
+        }
+        .donelist span:nth-child(1){
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="header-all">
+            <div class="header">
+                <h1>ToDoList</h1>
+                <input type="text" placeholder="添加ToDo" @keyup.enter="moveTodo" v-model.trim="msg">
+            </div>
+        </div>
+        <div class="content">
+            <div class="todo">
+                <div class="todoheader">
+                    <h2>正在进行</h2>
+                    <span v-text="todolist.length"></span>
+                </div>
+                <div class="todolistall">
+                    <div v-for="(item,index) in todolist" class="todolist">
+                        <span @click="movedone(index)"></span>
+                        <input type="text" v-model="item.task" @keyup.enter="edit(index)">
+                        <span @click="tododel(item._id,index)" class="del"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="done">
+                <div class="doneheader">
+                    <h2>正在进行</h2>
+                    <span v-text="donelist.length"></span>
+                </div>
+                <div class="donelistall">
+                    <div v-for="(item,index) in donelist" class="donelist">
+                        <span @click="movedone(index,'down')"></span>
+                        <input type="text" v-model="item.task" @input.lazy="edit(index,'down')">
+                        <span @click="tododel(item._id,index,'down')" class="del"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./fetch.js"></script>
+    <script src="./vuetodo2.js"></script>
+</body>
+</html>
